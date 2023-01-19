@@ -12,6 +12,8 @@ endif()
 
 # find dependencies
 find_package(ament_cmake_auto REQUIRED)
+find_package(can_msgs REQUIRED)
+
 ament_auto_find_build_dependencies()
 
 ament_auto_add_library(${PROJECT_NAME} SHARED
@@ -23,7 +25,9 @@ ament_auto_add_library(${PROJECT_NAME} SHARED
 ament_auto_add_library(socket_can_receiver_node SHARED
   src/socket_can_receiver_node.cpp
 )
-
+ament_target_dependencies(socket_can_receiver_node
+  can_msgs
+)
 target_link_libraries(socket_can_receiver_node
   ${PROJECT_NAME}
 )
